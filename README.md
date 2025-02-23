@@ -19,6 +19,8 @@ Proiectul contine o descriere ampla( care se poate gasi in word-ul atasat ) desp
 13. Implementarea a 3 operații de actualizare și de suprimare a datelor utilizând subcereri <br>
 <br>
 Diagrama conceptuala:
-![Diagrama conceptuala](https://github.com/user-attachments/assets/611b8905-d18b-4386-80fd-e848bb83150f)
+![Diagrama conceptuala](https://github.com/user-attachments/assets/38979ce9-eb99-469f-a3b4-0835061e9236)
+
+
 Diagrama entitate-relatie:
 ![Diagrama entitate- relaţie](https://github.com/user-attachments/assets/4e101090-4330-4560-aee6-e3dc364a3031)
