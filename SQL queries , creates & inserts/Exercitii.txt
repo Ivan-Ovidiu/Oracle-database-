@@ -1,0 +1,179 @@
+--12
+
+--Subcereri sincronizate, grupări de date, funcții grup,
+-- filtrare la nivel de grupuri cu subcereri nesincronizate
+
+SELECT
+    c.nume AS NUME_Client,
+    a.nume AS NUME_ANGAJAT,
+    SUM(p.suma) AS Total_Cheltuit
+FROM
+    Clienti c
+        JOIN
+    Comenzi co ON c.ID_Clienti = co.ID_Client
+        JOIN
+    Angajati a ON co.ID_Angajat = a.ID_Angajat
+        JOIN
+    Plati p ON c.ID_Plata = p.ID_Plata
+GROUP BY
+    c.nume, a.nume
+HAVING
+    SUM(p.suma) > (SELECT AVG(suma) FROM Plati)
+ORDER BY
+    Total_Cheltuit DESC;
+
+--Subcereri nesincronizate în clauza FROM
+
+SELECT
+    b.nume AS bautura_name,
+    COUNT(co.ID_Comanda) AS total_orders
+FROM
+    (SELECT ID_Bautura, nume FROM Bauturi) b
+        LEFT JOIN
+    Comenzi co ON b.ID_Bautura = co.ID_Bautura
+GROUP BY
+    b.nume
+ORDER BY
+    total_orders DESC;
+
+
+
+
+--Gruparea, funcții de agregare, filtrarea la nivel de grup cu subcereri nesincronizate în HAVING care implică cel puțin 3 tabele
+
+SELECT a.rol, COUNT(DISTINCT c.ID_Clienti) AS Total_Clienti
+FROM Angajati a
+         JOIN Comenzi co ON a.ID_Angajat = co.ID_Angajat
+         JOIN Clienti c ON co.ID_Client = c.ID_Clienti
+GROUP BY a.rol
+HAVING COUNT(DISTINCT c.ID_Clienti) > (
+
+    SELECT AVG(Clienti_Numar)
+    FROM (
+             SELECT COUNT(DISTINCT c1.ID_Clienti) AS Clienti_Numar
+             FROM Angajati a1
+                      JOIN Comenzi co1 ON a1.ID_Angajat = co1.ID_Angajat
+                      JOIN Clienti c1 ON co1.ID_Client = c1.ID_Clienti
+             GROUP BY a1.rol
+         )
+);
+
+
+
+--Folosirea funcțiilor NVL și DECODE în aceeași interogare
+SELECT a.nume, NVL(a.telefon, 'Fara numar de telefon') AS Telefon,
+       DECODE(a.rol, 'Manager',  'Barista', 'Alt rol') AS RoleType
+FROM Angajati a
+ORDER BY a.nume;
+
+--Această interogare calculează și categorizează volumul de muncă al angajaților, afișând numele, emailul (în majuscule),
+-- o prescurtare a numelui, anii lucrați, ultima dată lucrată și clasificarea volumului de comenzi ('High', 'Medium', 'Low'),
+-- pentru fiecare angajat, folosind o expresie comună de tabel (CTE) pentru a număra totalul comenzilor gestionate de fiecare angajat.
+
+--Folosirea funcțiilor de șiruri, funcțiilor de date, expresiei CASE și a clauzei WITH
+WITH TotalComenzi AS (
+    SELECT a.ID_Angajat, COUNT(co.ID_Comanda) AS Total_Comenzi
+    FROM Angajati a
+             JOIN Comenzi co ON a.ID_Angajat = co.ID_Angajat
+    GROUP BY a.ID_Angajat
+)
+SELECT a.nume,
+       UPPER(a.email) AS EMAIL,
+       SUBSTR(a.nume, 1, 3) AS NUMEPRESCURTAT,
+       EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM MIN(zl.ziua_data)) AS ANILUCARTI,
+       TO_CHAR(MAX(zl.ziua_data), 'YYYY-MM-DD') AS ULTIMAZILUCRATA,
+       CASE
+           WHEN tc.Total_Comenzi > 100 THEN 'Mare'
+           WHEN tc.Total_Comenzi BETWEEN 50 AND 100 THEN 'Mediu'
+           ELSE 'Mic'
+           END AS VOLUMCOMENZI
+FROM Angajati a
+         JOIN Zile_lucrate zl ON a.ID_Angajat = zl.ID_Angajat
+         JOIN TotalComenzi tc ON a.ID_Angajat = tc.ID_Angajat
+GROUP BY a.ID_Angajat, a.nume, a.email, tc.Total_Comenzi;
+
+
+--------------------------------------------
+
+--13
+
+--Șterge comenzile făcute de clienții care au plătit printr-o anumită metodă și care au efectuat plăți peste o anumită sumă:
+
+DELETE FROM Comenzi
+WHERE ID_Client IN (
+    SELECT ID_Clienti
+    FROM Clienti
+    WHERE ID_Plata IN (
+        SELECT ID_Plata
+        FROM Plati
+        WHERE metoda = 'cash' AND suma > 100
+    )
+);
+
+
+--Dacă un produs are mai mult de un client care a comandat acest produs, cantitatea este dublată.
+-- Dacă un produs are exact trei clienți care l-au comandat, prețul este redus cu 20%.
+-- Acest lucru se aplică doar produselor care au mai mult de un client sau exact trei clienți care le-au comandat.
+
+UPDATE Produs
+SET
+    cantitate =
+        CASE
+            WHEN ID_Produs IN (
+                SELECT ID_Produs
+                FROM (
+                         SELECT ID_Produs, COUNT(DISTINCT ID_Client) AS nr_clienti
+                         FROM Comenzi
+                         GROUP BY ID_Produs
+                         HAVING COUNT(DISTINCT ID_Client) > 1
+                     ) Produse_Mai_Multe_Clienti
+            ) THEN cantitate * 2
+            ELSE cantitate
+            END,
+    pret =
+        CASE
+            WHEN ID_Produs IN (
+                SELECT ID_Produs
+                FROM (
+                         SELECT ID_Produs, COUNT(DISTINCT ID_Client) AS nr_clienti
+                         FROM Comenzi
+                         GROUP BY ID_Produs
+                         HAVING COUNT(DISTINCT ID_Client) = 3
+                     ) Produse_Trei_Clienti
+            ) THEN pret * 0.8
+            ELSE pret
+            END
+WHERE ID_Produs IN (
+    SELECT ID_Produs
+    FROM (
+             SELECT ID_Produs, COUNT(DISTINCT ID_Client) AS nr_clienti
+             FROM Comenzi
+             GROUP BY ID_Produs
+             HAVING COUNT(DISTINCT ID_Client) > 1 OR COUNT(DISTINCT ID_Client) = 3
+         ) Produse_Mai_Multe_Sau_Trei_Clienti
+);
+
+
+
+
+--Actualizează numele produselor pentru care băuturile asociate au fost comandate de clienți cu plăți mai mari de 1000.
+-- Pune inaintea numelor produselor asociate cu "Premium - ".
+UPDATE Produs
+SET nume = CONCAT('Popular - ', nume)
+WHERE ID_Produs IN (
+    SELECT ID_Produs
+    FROM Produs
+    WHERE ID_Bautura IN (
+        SELECT ID_Bautura
+        FROM Comenzi
+        WHERE ID_Client IN (
+            SELECT ID_Clienti
+            FROM Clienti
+            WHERE ID_Plata IN (
+                SELECT ID_Plata
+                FROM Plati
+                WHERE suma > 1000
+            )
+        )
+    )
+);

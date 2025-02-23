@@ -1,0 +1,165 @@
+CREATE TABLE Bauturi (
+    ID_Bautura INT PRIMARY KEY,
+    nume VARCHAR(255) UNIQUE,
+    tip VARCHAR(255) NOT NULL,
+    pret DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE Plati (
+    ID_Plata INT PRIMARY KEY,
+    data DATE NOT NULL,
+    metoda VARCHAR(255) NOT NULL,
+    suma DECIMAL(10, 2) NOT NULL
+);
+CREATE TABLE Clienti (
+   ID_Clienti INT PRIMARY KEY,
+   nume VARCHAR(255) UNIQUE,
+   email VARCHAR(255) UNIQUE ,
+   ID_Plata INT NOT NULL ,
+   FOREIGN KEY (ID_Plata) REFERENCES Plati(ID_Plata)
+);
+CREATE TABLE Angajati (
+    ID_Angajat INT PRIMARY KEY,
+    rol VARCHAR(255) NOT NULL,
+    nume VARCHAR(255) UNIQUE,
+    email VARCHAR(255) UNIQUE ,
+    telefon VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Zile_lucrate (
+    ID_Zile_lucrate INT PRIMARY KEY,
+    ziua_data DATE NOT NULL,
+    zi_inceput timestamp NOT NULL ,
+    zi_final timestamp NOT NULL ,
+    ID_Angajat INT,
+    FOREIGN KEY (ID_Angajat) REFERENCES Angajati(ID_Angajat)
+);
+
+CREATE TABLE Produs (
+    ID_Produs INT PRIMARY KEY,
+    nume VARCHAR(255)UNIQUE ,
+    pret DECIMAL(10, 2)NOT NULL,
+    cantitate INT NOT NULL,
+    ID_Bautura INT,
+    FOREIGN KEY (ID_Bautura) REFERENCES bAUTURI(ID_Bautura)
+);
+CREATE TABLE Comenzi (
+      ID_Comanda INT PRIMARY KEY,
+      ID_Bautura INT,
+      ID_Angajat INT,
+      ID_Client INT,
+      FOREIGN KEY (ID_Bautura) REFERENCES Bauturi(ID_Bautura),
+      FOREIGN KEY (ID_Angajat) REFERENCES Angajati(ID_Angajat),
+      FOREIGN KEY (ID_Client) REFERENCES Clienti(ID_Clienti)
+);
+
+CREATE TABLE Bauturi_Produse (
+    ID_Bautura_Produs INT PRIMARY KEY,
+    ID_Bautura INT,
+    ID_Produs INT,
+    FOREIGN KEY (ID_Bautura) REFERENCES Bauturi(ID_Bautura),
+    FOREIGN KEY (ID_Produs) REFERENCES Produs(ID_Produs)
+);
+
+CREATE TABLE Angajati_Zile_lucrate (
+    ID_Angajati_Zile_lucrate INT PRIMARY KEY,
+    ID_Angajat INT,
+    ID_Zile_lucrate INT,
+    FOREIGN KEY (ID_Angajat) REFERENCES Angajati(ID_Angajat),
+    FOREIGN KEY (ID_Zile_lucrate) REFERENCES Zile_lucrate(ID_Zile_lucrate));
+
+--Inserare in tabelul "Bauturi":
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (1, 'Caffe Latte', 'Cafea', 25.99);
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (2, 'Cappuccino', 'Cafea', 20.99);
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (3, 'Espresso', 'Cafea', 15.99);
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (4, 'Americano', 'Cafea', 18.99);
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (5, 'Macchiato', 'Cafea', 22.99);
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (6, 'Ceai verde', 'Ceai', 30.99);
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (7, 'Ceai negru', 'Ceai', 25.99);
+INSERT INTO Bauturi (ID_Bautura, nume,tip, pret) VALUES (8, 'Ceai de fructe', 'Ceai', 35.99);
+
+
+--Inserare in tabelul "Plati":
+INSERT INTO Plati (ID_Plata,data, metoda, suma) VALUES (1,to_date('2024-03-14','YYYY-MM-DD'), 'Card',57.99);
+INSERT INTO Plati (ID_Plata,data, metoda, suma) VALUES (2,to_date('2024-03-14','YYYY-MM-DD') , 'Cash', 10000);
+INSERT INTO Plati (ID_Plata,data, metoda, suma) VALUES (3,to_date('2023-04-23','YYYY-MM-DD') , 'PayPal', 10000);
+INSERT INTO Plati (ID_Plata,data, metoda, suma) VALUES (4, to_date('2024-02-01','YYYY-MM-DD') , 'Transfer bancar', 38.99);
+INSERT INTO Plati (ID_Plata,data, metoda, suma) VALUES (5, to_date('2024-01-16','YYYY-MM-DD'), 'Card', 42.99);
+
+--Inserare in tabelul "Clienti":
+INSERT INTO Clienti (ID_Clienti, nume, email, ID_Plata) VALUES (1, 'Ion Popescu', 'ion.popescu@example.com', 1);
+INSERT INTO Clienti (ID_Clienti, nume, email, ID_Plata) VALUES (2, 'Maria Ionescu', 'maria.ionescu@example.com', 2);
+INSERT INTO Clienti (ID_Clienti, nume, email, ID_Plata) VALUES (3, 'Vasile Georgescu', 'vasile.georgescu@example.com', 3);
+INSERT INTO Clienti (ID_Clienti, nume, email, ID_Plata) VALUES (4, 'Ana Marinescu', 'ana.marinescu@example.com', 4);
+INSERT INTO Clienti (ID_Clienti, nume, email, ID_Plata) VALUES (5, 'Gheorghe Popa', 'gheorghe.popa@example.com', 5);
+
+--Inserare in tabelul "Angajati":
+INSERT INTO Angajati (ID_Angajat, rol, nume, email, telefon)  VALUES (1, 'Brista', 'Maria Vasilescu', 'maria1@example.com', '0712345678');
+INSERT INTO Angajati (ID_Angajat, rol, nume, email, telefon)  VALUES (2, 'Barista', 'Ana Benim', 'ana2@example.com', '0723456789');
+INSERT INTO Angajati (ID_Angajat, rol, nume, email, telefon)  VALUES (3, 'Barista', 'Matei Ivan', 'matei3@example.com', '0734567890');
+INSERT INTO Angajati (ID_Angajat, rol, nume, email, telefon)  VALUES (4, 'Manager', 'Darius Hornet', 'darius4@example.com', '0745678901');
+INSERT INTO Angajati (ID_Angajat, rol, nume, email, telefon)  VALUES (5, 'Casier', 'Irina Dumitru', 'irina5@example.com', '0756789012');
+INSERT INTO Angajati (ID_Angajat, rol, nume, email, telefon) VALUES (6, 'Casier', 'Stefan Curechiriu', 'stefan6@example.com', '0767890123');
+
+--Inserare in tabelul "Zile_lucrate":
+
+INSERT INTO Zile_lucrate (ID_Zile_lucrate, ziua_data, zi_inceput, zi_final, ID_Angajat) VALUES (1, to_date('2024-01-01','YYYY-MM-DD'), TO_TIMESTAMP('9:00','HH24:MI:SS.FF'), TO_TIMESTAMP('17:00','HH24:MI:SS.FF'), 1);
+INSERT INTO Zile_lucrate (ID_Zile_lucrate, ziua_data, zi_inceput, zi_final, ID_Angajat) VALUES (2, to_date('2024-01-02','YYYY-MM-DD'), TO_TIMESTAMP('9:00','HH24:MI:SS.FF'), TO_TIMESTAMP('19:00','HH24:MI:SS.FF'), 2);
+INSERT INTO Zile_lucrate (ID_Zile_lucrate, ziua_data, zi_inceput, zi_final, ID_Angajat) VALUES (3, to_date('2024-01-03','YYYY-MM-DD'), TO_TIMESTAMP('9:00','HH24:MI:SS.FF'), TO_TIMESTAMP('20:00','HH24:MI:SS.FF'), 3);
+INSERT INTO Zile_lucrate (ID_Zile_lucrate, ziua_data, zi_inceput, zi_final, ID_Angajat) VALUES (4, to_date('2024-01-04','YYYY-MM-DD'), TO_TIMESTAMP('9:00','HH24:MI:SS.FF'), TO_TIMESTAMP('17:00','HH24:MI:SS.FF'), 4);
+INSERT INTO Zile_lucrate (ID_Zile_lucrate, ziua_data, zi_inceput, zi_final, ID_Angajat) VALUES (5, to_date('2024-01-05','YYYY-MM-DD'), TO_TIMESTAMP('9:00','HH24:MI:SS.FF'), TO_TIMESTAMP('20:00','HH24:MI:SS.FF'), 5);
+
+
+
+--Inserare in tabelul "Produs":
+INSERT INTO Produs (ID_Produs, nume, pret, cantitate, ID_Bautura) VALUES (1, 'cafea', 10.00, 50, 1);
+INSERT INTO Produs (ID_Produs, nume, pret, cantitate, ID_Bautura) VALUES (2, 'ceai verde', 8.00, 30, 2);
+INSERT INTO Produs (ID_Produs, nume, pret, cantitate, ID_Bautura) VALUES (3, 'vanilie', 12.00, 20, 3);
+INSERT INTO Produs (ID_Produs, nume, pret, cantitate, ID_Bautura) VALUES (4, 'caramel', 5.00, 100, 4);
+INSERT INTO Produs (ID_Produs, nume, pret, cantitate, ID_Bautura) VALUES (5, 'lapte', 15.00, 40, 5);
+INSERT INTO Produs (ID_Produs, nume, pret, cantitate, ID_Bautura) VALUES (6, 'zahar', 3.00, 200, 6);
+
+--Inserare in tabelul "Comenzi":
+INSERT INTO Comenzi (ID_Comanda, ID_Bautura, ID_Angajat, ID_Client) VALUES (1, 1, 1, 1);
+INSERT INTO Comenzi (ID_Comanda, ID_Bautura, ID_Angajat, ID_Client) VALUES (2, 2, 1, 2);
+INSERT INTO Comenzi (ID_Comanda,  ID_Bautura, ID_Angajat, ID_Client) VALUES (3, 3, 1, 3);
+INSERT INTO Comenzi (ID_Comanda,  ID_Bautura, ID_Angajat, ID_Client) VALUES (4, 4, 4, 4);
+INSERT INTO Comenzi (ID_Comanda,  ID_Bautura, ID_Angajat, ID_Client) VALUES (5, 5, 5, 5);
+
+--Inserare in tabelul "Bauturi_Produse":
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (1, 1, 1);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (2, 2, 2);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (3, 3, 3);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (4, 4, 4);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (5, 5, 5);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (6, 1, 2);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (7, 2, 3);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (8, 3, 4);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (9, 4, 5);
+INSERT INTO Bauturi_Produse (ID_Bautura_Produs, ID_Bautura, ID_Produs) VALUES (10, 5, 1);
+
+
+--inserare in tabelul "Angajati_Zile_lucrate":
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (1, 1, 1);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (2, 2, 2);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (3, 3, 3);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (4, 4, 4);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (5, 5, 5);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (6, 1, 2);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (7, 2, 3);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (8, 3, 4);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (9, 4, 5);
+INSERT INTO Angajati_Zile_lucrate (ID_Angajati_Zile_lucrate, ID_Angajat, ID_Zile_lucrate)
+VALUES (10, 5, 1);
+
+
+
