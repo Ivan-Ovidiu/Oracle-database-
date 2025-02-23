@@ -1,4 +1,4 @@
-# Oracle-database-
+# Oracle-database
 Stagiul de inceput al bazei mele de date pentru o cafenea<br>
 Proiectul contine o descriere ampla( care se poate gasi in word-ul atasat ) despre urmatoarele:<br>
 1.	Descrierea modelului real	<br>
