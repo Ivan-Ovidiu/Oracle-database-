@@ -16,9 +16,9 @@ Proiectul contine o descriere ampla( care se poate gasi in word-ul atasat ) desp
 10.  Crearea unei secvențe	<br>
 11.	Crearea tabelelor în SQL și inserarea de date	<br>
 12. Formulați în limbaj natural și implementați 5 cereri SQL complexe	<br>
-13. Implementarea a 3 operații de actualizare și de suprimare a datelor utilizând subcereri<br>
-
-Diagrama conceptuala:
+13. Implementarea a 3 operații de actualizare și de suprimare a datelor utilizând subcereri <br>
+<br>
+Diagrama conceptuala:<br>
 ![Diagrama conceptuala](https://github.com/user-attachments/assets/611b8905-d18b-4386-80fd-e848bb83150f)
-Diagrama entitate-relatie:
+Diagrama entitate-relatie:<br>
 ![Diagrama entitate- relaţie](https://github.com/user-attachments/assets/4e101090-4330-4560-aee6-e3dc364a3031)
