@@ -23,4 +23,4 @@ Diagrama conceptuala:
 
 
 Diagrama entitate-relatie:
-![Diagrama entitate- relaţie](https://github.com/user-attachments/assets/4e101090-4330-4560-aee6-e3dc364a3031)
+![Diagrama entitate- relaţie](https://github.com/user-attachments/assets/83a74508-5d31-4a01-ba37-bbfafc9b26be)
