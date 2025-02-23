@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" modified="2024-05-30T13:32:01.635Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="_Ydfjt6t5J9_YOSW0eNh" version="24.4.10" type="device">
+  <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
+    <mxGraphModel dx="1242" dy="582" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="JwdWgJcwXFqElutiA5cO-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="GzoWFAtWC4wCw4AYE1iF-1" target="JwdWgJcwXFqElutiA5cO-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="460" y="130" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmandOne;endFill=0;startArrow=ERzeroToMany;startFill=0;" parent="1" target="JwdWgJcwXFqElutiA5cO-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="160" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;" parent="1" target="JwdWgJcwXFqElutiA5cO-18" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="325" y="130" />
+              <mxPoint x="200" y="130" />
+            </Array>
+            <mxPoint x="310" y="130" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-12" value="Bauturi:&lt;div&gt;PK: ID_Bauturi&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="540" y="270" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.433;entryY=1.063;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERmandOne;startFill=0;endArrow=ERzeroToMany;endFill=0;" parent="1" source="JwdWgJcwXFqElutiA5cO-14" target="GzoWFAtWC4wCw4AYE1iF-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-14" value="Produse:&lt;div&gt;PK: ID_Produs&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="540" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-16" value="Angajati:&lt;div&gt;PK: ID_Angajat&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERzeroToMany;endFill=0;startArrow=ERmandOne;startFill=0;" parent="1" source="JwdWgJcwXFqElutiA5cO-18" target="JwdWgJcwXFqElutiA5cO-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-18" value="Clienti:&lt;div&gt;PK: ID_Client&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-20" value="Plati:&lt;div&gt;PK: ID_Plata&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERzeroToMany;endFill=0;startArrow=ERmandOne;startFill=0;" parent="1" source="JwdWgJcwXFqElutiA5cO-22" target="GzoWFAtWC4wCw4AYE1iF-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JwdWgJcwXFqElutiA5cO-22" value="Zile_lucrate:&lt;div&gt;PK: ID_Zile&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-1" value="Comenzi&lt;div&gt;PK: ID_Comanda&lt;/div&gt;&lt;div&gt;FK:ID_Client&lt;/div&gt;&lt;div&gt;FK:ID_Angajat&lt;/div&gt;&lt;div&gt;FK: ID_Bauturi&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="60" width="150" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERzeroToMany;startFill=0;endArrow=ERmandOne;endFill=0;" parent="1" source="GzoWFAtWC4wCw4AYE1iF-5" target="JwdWgJcwXFqElutiA5cO-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="740" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-5" value="Produse_Bauturi:&lt;div&gt;PK: ID_Bauturi&lt;/div&gt;&lt;div&gt;PK: ID_Produs&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="690" y="360" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=ERzeroToMany;startFill=0;endArrow=ERmandOne;endFill=0;" parent="1" source="JwdWgJcwXFqElutiA5cO-20" target="JwdWgJcwXFqElutiA5cO-18" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="419" as="sourcePoint" />
+            <mxPoint x="220" y="349" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200" y="420" />
+              <mxPoint x="200" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=ERzeroToMany;startFill=0;endArrow=ERmandOne;endFill=0;" parent="1" source="GzoWFAtWC4wCw4AYE1iF-12" target="JwdWgJcwXFqElutiA5cO-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GzoWFAtWC4wCw4AYE1iF-12" value="Zile_lucrate_Angajat:&lt;div&gt;PK: ID_Zile&lt;/div&gt;&lt;div&gt;PK: ID_Angajat&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="370" width="140" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
