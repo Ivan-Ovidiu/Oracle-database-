@@ -1,7 +1,6 @@
 # Oracle-database-
 Stagiul de inceput al bazei mele de date pentru o cafenea<br>
 Proiectul contine o descriere ampla( care se poate gasi in word-ul atasat ) despre urmatoarele:<br>
-0.  	TEMA <br>
 1.	Descrierea modelului real	<br>
 2.	Prezentarea constrângerilor	<br>
 3.	Descrierea entităților	<br>
